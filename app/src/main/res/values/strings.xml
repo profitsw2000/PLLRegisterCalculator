@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">PLLRegisterCalculator</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lfm_section_title">ЛЧМ</string>
+    <string name="lower_freq_value_field_text">Нижнее значение</string>
+    <string name="mega_hertz_freq_dimen">МГц</string>
+    <string name="highest_freq_value_field_text">Верхнее значение</string>
+    <string name="lfm_period_input_title_text">Период модуляции</string>
+    <string name="millisec_time_dimen">мс</string>
+    <string name="symmetry_lfm_selection_check_box_text">Симметричная</string>
+    <string name="ref_reg_title">REF:</string>
+    <string name="register_section_title_text">Регистры</string>
+    <string name="int_reg_title">INT:</string>
+    <string name="frac_reg_title">FRAC:</string>
+    <string name="mod_reg_title">MOD:</string>
+    <string name="ctr1_rst_reg_title">CTR1_RST:</string>
+    <string name="ctr1_reg_title">CTR1:</string>
+    <string name="ctr2_reg_title">CTR2:</string>
+    <string name="ctr3_reg_title">CTR3:</string>
+    <string name="lfm1_reg_title">LFM1:</string>
+    <string name="lfm2_reg_title">LFM2:</string>
+    <string name="lfm3_reg_title">LFM3:</string>
 </resources>

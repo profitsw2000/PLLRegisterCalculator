@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="section_title_text_size">22sp</dimen>
+    <dimen name="lfm_input_views_top_margin">16dp</dimen>
+    <dimen name="lfm_param_input_text_field_height">32dp</dimen>
+    <dimen name="lfm_input_views_left_margin">16dp</dimen>
+    <dimen name="fragment_root_layout_padding">16dp</dimen>
+    <dimen name="register_title_text_size">18sp</dimen>
+    <dimen name="register_section_margin_top">16dp</dimen>
+    <dimen name="register_value_text_size">18sp</dimen>
+</resources>
