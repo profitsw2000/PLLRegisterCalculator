@@ -16,6 +16,7 @@ const val LFM31 = 0x500006
 class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
 
     override suspend fun getRegistersValue(lfmInputParametersModel: LfmInputParametersModel): Registers1208PL1UDataModel {
+
         return with(lfmInputParametersModel) {
             Registers1208PL1UDataModel(
                 ref = getRefRegister(
