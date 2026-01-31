@@ -52,12 +52,14 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="@dimen/lfm_param_input_text_field_height"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="@+id/lowest_frequency_value_input_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
             app:layout_constraintTop_toTopOf="@+id/lowest_frequency_value_input_title_text_view">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lowest_frequency_value_text_input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLength="5"
@@ -69,7 +71,7 @@
             android:id="@+id/lowest_frequency_value_freq_dimen_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/lfm_input_views_left_margin"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
             android:text="@string/mega_hertz_freq_dimen"
             app:layout_constraintBottom_toBottomOf="@+id/lowest_frequency_value_input_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/right_guideline"
@@ -89,12 +91,14 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="@dimen/lfm_param_input_text_field_height"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="@+id/highest_frequency_value_input_title_text_view"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@+id/highest_frequency_value_input_title_text_view">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/highest_frequency_value_text_input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLength="5"
@@ -106,7 +110,7 @@
             android:id="@+id/highest_frequency_value_freq_dimen_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/lfm_input_views_left_margin"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
             android:text="@string/mega_hertz_freq_dimen"
             app:layout_constraintBottom_toBottomOf="@+id/highest_frequency_value_input_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/right_guideline"
@@ -126,16 +130,18 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="@dimen/lfm_param_input_text_field_height"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="@+id/period_value_input_title_text_view"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@+id/period_value_input_title_text_view">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/period_value_text_input_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLength="3"
-                android:inputType="number"/>
+                android:layout_height="32dp"
+                android:inputType="number"
+                android:maxLength="3" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,7 +149,7 @@
             android:id="@+id/period_value_time_dimen_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/lfm_input_views_left_margin"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
             android:text="@string/millisec_time_dimen"
             app:layout_constraintBottom_toBottomOf="@+id/period_value_text_input_layout"
             app:layout_constraintStart_toEndOf="@+id/right_guideline"
@@ -314,7 +320,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/register_value_text_size"
-            android:text="0x840609"
+            tools:text="0x840609"
             app:layout_constraintBottom_toBottomOf="@+id/ctr1_rst_reg_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@+id/ctr1_rst_reg_title_text_view" />
@@ -324,7 +330,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/register_value_text_size"
-            android:text="0x840609"
+            tools:text="0x840609"
             app:layout_constraintBottom_toBottomOf="@+id/ctr1_rst_reg_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/right_guideline"
             app:layout_constraintTop_toTopOf="@+id/ctr1_rst_reg_title_text_view" />
@@ -494,7 +500,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/register_value_text_size"
-            android:text="0x840609"
+            tools:text="0x840609"
             app:layout_constraintBottom_toBottomOf="@+id/lfm3_reg_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@+id/lfm3_reg_title_text_view" />
@@ -504,10 +510,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/register_value_text_size"
-            android:text="0x840609"
+            tools:text="0x840609"
             app:layout_constraintBottom_toBottomOf="@+id/lfm3_reg_title_text_view"
             app:layout_constraintStart_toEndOf="@+id/right_guideline"
             app:layout_constraintTop_toTopOf="@+id/lfm3_reg_title_text_view" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/registers_titles_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="registers_title_text_view, ref_reg_title_text_view, int_reg_title_text_view, frac_reg_title_text_view,
+            mod_reg_title_text_view, ctr1_rst_reg_title_text_view, ctr1_reg_title_text_view, ctr2_reg_title_text_view,
+            ctr3_reg_title_text_view, lfm1_reg_title_text_view, lfm2_reg_title_text_view, lfm3_reg_title_text_view"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/profile_registers_value_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="ref_reg_value_title_text_view, int_reg_value_title_text_view, frac_reg_value_title_text_view,
+            mod_reg_value_title_text_view, ctr1_rst_reg_value_title_text_view, ctr1_reg_value_title_text_view, ctr2_reg_value_title_text_view,
+            ctr3_reg_value_title_text_view, lfm1_reg_value_title_text_view, lfm2_reg_value_title_text_view, lfm3_reg_value_title_text_view"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/first_profile_registers_value_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="ref1_reg_value_title_text_view, int1_reg_value_title_text_view, frac1_reg_value_title_text_view,
+            mod1_reg_value_title_text_view, ctr11_rst_reg_value_title_text_view, ctr11_reg_value_title_text_view, ctr21_reg_value_title_text_view,
+            ctr31_reg_value_title_text_view, lfm11_reg_value_title_text_view, lfm21_reg_value_title_text_view, lfm31_reg_value_title_text_view"/>
+
+        <TextView
+            android:id="@+id/error_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_calculation_error_text"
+            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/calculate_register_value_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/calculate_register_value_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/lfm3_reg_title_text_view"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
