@@ -1,5 +1,6 @@
 package ru.profitsw200.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import ru.profitsw200.data.data.PLLRegisters1208PL1URepositoryImpl
 import ru.profitsw200.data.domain.PLLRegisters1208PL1URepository
 import ru.profitsw200.data.model.LfmInputParametersModel
 import ru.profitsw200.data.model.Registers1208PL1UDataModel
@@ -48,24 +48,26 @@ class MainViewModel(
         _pllRegistersLiveData.value = PLLRegistersLoadState.Load
         if (errorCode == NO_ERROR) {
             lifecycleScope.launch {
-                getPllRegistersFromRepository(lfmInputParametersModel)
+                val result = getPllRegistersFromRepository(lfmInputParametersModel)
+                if (result != null) _pllRegistersLiveData.value = PLLRegistersLoadState.Success(result)
             }
         } else {
             _pllRegistersLiveData.value = PLLRegistersLoadState.Error(errorCode)
         }
     }
 
-    private fun getPllRegistersFromRepository(
+    private suspend fun getPllRegistersFromRepository(
         lfmInputParametersModel: LfmInputParametersModel
-    ) {
-        ioCoroutineScope.launch {
+    ): Registers1208PL1UDataModel? {
+        val deferred: Deferred<Registers1208PL1UDataModel?> = ioCoroutineScope.async {
             try {
-                val result = pllRegisters1208PL1URepository.getRegistersValue(lfmInputParametersModel)
-                _pllRegistersLiveData.value = PLLRegistersLoadState.Success(result)
+                pllRegisters1208PL1URepository.getRegistersValue(lfmInputParametersModel)
             } catch (exc: Exception) {
                 _pllRegistersLiveData.value = PLLRegistersLoadState.Error(REGISTERS_CALCULATION_ERROR)
+                null
             }
         }
+        return deferred.await()
     }
 
     private fun checkInputValues(lfmInputParametersModel: LfmInputParametersModel): Int {
@@ -74,7 +76,7 @@ class MainViewModel(
         lfmInputParametersModel.apply {
             if (lowestLfmFrequency < MIN_LFM_FREQ) errorCode = errorCode or LOW_FREQUENCY_UNDER_INPUT_ERROR
             if (lowestLfmFrequency > MAX_LFM_FREQ) errorCode = errorCode or LOW_FREQUENCY_ABOVE_INPUT_ERROR
-            if (highestLfmFrequency - lowestLfmFrequency > 10_000_000) errorCode = errorCode or LOW_FREQ_HIGHER_THAN_HIGH_FREQ_INPUT_ERROR
+            if (highestLfmFrequency - lowestLfmFrequency < 10_000_000) errorCode = errorCode or LOW_FREQ_HIGHER_THAN_HIGH_FREQ_INPUT_ERROR
             if (highestLfmFrequency < MIN_LFM_FREQ) errorCode = errorCode or HIGH_FREQUENCY_UNDER_INPUT_ERROR
             if (highestLfmFrequency > MAX_LFM_FREQ) errorCode = errorCode or HIGH_FREQUENCY_ABOVE_INPUT_ERROR
             if (lfmDeviationPeriod > MAX_LFM_PERIOD_MS) errorCode = errorCode or MODULATION_PERIOD_ABOVE_INPUT_ERROR

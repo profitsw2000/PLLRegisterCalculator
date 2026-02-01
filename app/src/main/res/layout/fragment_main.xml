@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/fragment_root_layout_padding"
+    android:paddingHorizontal="@dimen/fragment_root_layout_padding"
+    android:paddingVertical="@dimen/fragment_root_layout_top_padding"
     tools:context=".presentation.view.MainFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,28 +43,29 @@
             android:id="@+id/lowest_frequency_value_input_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
             android:text="@string/lower_freq_value_field_text"
+            app:layout_constraintBottom_toBottomOf="@+id/lowest_frequency_value_text_input_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_title_text_view" />
+            app:layout_constraintTop_toTopOf="@+id/lowest_frequency_value_text_input_layout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lowest_frequency_value_text_input_layout"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="@dimen/lfm_param_input_text_field_height"
+            android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@+id/lowest_frequency_value_input_title_text_view"
-            app:layout_constraintStart_toEndOf="@+id/left_guideline"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
-            app:layout_constraintTop_toTopOf="@+id/lowest_frequency_value_input_title_text_view">
+            app:layout_constraintStart_toEndOf="@+id/left_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/input_title_text_view">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lowest_frequency_value_text_input_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLength="5"
-                android:inputType="number"/>
+                android:layout_height="wrap_content"
+                android:padding="@dimen/input_form_edit_text_padding"
+                android:inputType="number"
+                android:text="@string/lowest_frequency_default_value"
+                android:maxLength="5" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,26 +83,27 @@
             android:id="@+id/highest_frequency_value_input_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
             android:text="@string/highest_freq_value_field_text"
+            app:layout_constraintBottom_toBottomOf="@+id/highest_frequency_value_text_input_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lowest_frequency_value_input_title_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/lowest_frequency_value_text_input_layout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/highest_frequency_value_text_input_layout"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="@dimen/lfm_param_input_text_field_height"
+            android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@+id/highest_frequency_value_input_title_text_view"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
-            app:layout_constraintTop_toTopOf="@+id/highest_frequency_value_input_title_text_view">
+            app:layout_constraintTop_toBottomOf="@+id/lowest_frequency_value_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/highest_frequency_value_text_input_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/input_form_edit_text_padding"
+                android:text="@string/highest_frequency_default_value"
                 android:maxLength="5"
                 android:inputType="number"/>
 
@@ -120,27 +123,29 @@
             android:id="@+id/period_value_input_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
             android:text="@string/lfm_period_input_title_text"
+            app:layout_constraintBottom_toBottomOf="@+id/period_value_text_input_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/highest_frequency_value_input_title_text_view" />
+            app:layout_constraintTop_toTopOf="@+id/period_value_text_input_layout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/period_value_text_input_layout"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="@dimen/lfm_param_input_text_field_height"
+            android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@+id/period_value_input_title_text_view"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
             app:layout_constraintStart_toEndOf="@+id/left_guideline"
-            app:layout_constraintTop_toTopOf="@+id/period_value_input_title_text_view">
+            app:layout_constraintTop_toBottomOf="@+id/highest_frequency_value_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/period_value_text_input_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/input_form_edit_text_padding"
+                android:inputType="numberDecimal"
+                android:text="@string/lfm_period_default_value"
+                android:digits="0123456789."
                 android:maxLength="3" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -159,10 +164,9 @@
             android:id="@+id/symmetry_selection_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
             android:text="@string/symmetry_lfm_selection_check_box_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/period_value_input_title_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/period_value_text_input_layout" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/calculate_register_value_button"

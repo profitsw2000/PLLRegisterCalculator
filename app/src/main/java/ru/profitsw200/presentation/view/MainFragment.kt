@@ -54,10 +54,13 @@ class MainFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         calculateRegisterValueButton.setOnClickListener {
-            if (isInputNotEmpty(lowestFrequencyValueTextInputLayout, lowestFrequencyValueTextInputEditText) &&
-                isInputNotEmpty(highestFrequencyValueTextInputLayout, highestFrequencyValueTextInputEditText) &&
-                isInputNotEmpty(periodValueTextInputLayout, periodValueTextInputEditText)
-            ) {
+            clearInputFormsErrors()
+
+            val lowestInputIsNotEmpty = isInputNotEmpty(lowestFrequencyValueTextInputLayout, lowestFrequencyValueTextInputEditText)
+            val highestInputIsNotEmpty = isInputNotEmpty(highestFrequencyValueTextInputLayout, highestFrequencyValueTextInputEditText)
+            val periodInputIsNotEmpty = isInputNotEmpty(periodValueTextInputLayout, periodValueTextInputEditText)
+
+            if (lowestInputIsNotEmpty && highestInputIsNotEmpty && periodInputIsNotEmpty) {
                 mainViewModel.calculatePllRegisters(
                     LfmInputParametersModel(
                         lowestFrequencyValueTextInputEditText.text.toString().toLong()*1_000_000,
@@ -68,6 +71,12 @@ class MainFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun clearInputFormsErrors() = with(binding) {
+        lowestFrequencyValueTextInputLayout.error = null
+        highestFrequencyValueTextInputLayout.error = null
+        periodValueTextInputLayout.error = null
     }
 
     private fun isInputNotEmpty(

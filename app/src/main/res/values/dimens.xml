@@ -8,4 +8,6 @@
     <dimen name="register_title_text_size">18sp</dimen>
     <dimen name="register_section_margin_top">16dp</dimen>
     <dimen name="register_value_text_size">18sp</dimen>
+    <dimen name="fragment_root_layout_top_padding">48dp</dimen>
+    <dimen name="input_form_edit_text_padding">4dp</dimen>
 </resources>

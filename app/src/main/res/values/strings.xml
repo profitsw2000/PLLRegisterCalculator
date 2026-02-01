@@ -31,4 +31,7 @@
     <string name="modulation_period_under_input_error_text">Не менее 0,2 мс</string>
     <string name="register_calculation_error_text">Не удалось получить значения регистров</string>
     <string name="empty_input_error_text">Пустое поле</string>
+    <string name="lowest_frequency_default_value">13250</string>
+    <string name="highest_frequency_default_value">13400</string>
+    <string name="lfm_period_default_value">50</string>
 </resources>

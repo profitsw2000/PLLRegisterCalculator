@@ -1,8 +1,10 @@
 package ru.profitsw200.data.data
 
+import android.util.Log
 import ru.profitsw200.data.domain.PLLRegisters1208PL1URepository
 import ru.profitsw200.data.model.LfmInputParametersModel
 import ru.profitsw200.data.model.Registers1208PL1UDataModel
+import ru.profitsw200.utils.TAG
 
 const val MOD = 32_000
 const val Fref = 20_000_000L
@@ -12,6 +14,11 @@ const val CTR2 = 0xA00002
 const val CTR3 = 0xC00001
 const val LFM3 = 0x500204
 const val LFM31 = 0x500006
+const val INT_REG = 0x200000
+const val FRAC_REG = 0x400000
+const val LFM1_REG = 0x100000
+const val LFM2_REG = 0x300000
+const val MOD_REG = 0x607D00
 
 class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
 
@@ -33,7 +40,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
                     lfmDeviationPeriod,
                     isSymmetricLfm
                 ),
-                mod = MOD,
+                mod = MOD_REG,
                 ctr1Rst = CTR1_RST,
                 ctr1 = CTR1,
                 ctr2 = CTR2,
@@ -48,7 +55,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
                     lfmDeviationPeriod,
                     isSymmetricLfm
                 ),
-                lfm3 = LFM3,
+                lfm3 = getLfm3Register(isSymmetricLfm),
                 isSymmetric = isSymmetricLfm,
                 ref1 = getRefRegister(
                     lfmDeviationPeriod,
@@ -64,7 +71,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
                     lfmDeviationPeriod,
                     isSymmetricLfm
                 ),
-                mod1 = MOD,
+                mod1 = MOD_REG,
                 ctr1Rst1 = CTR1_RST,
                 ctr11 = CTR1,
                 ctr21 = CTR2,
@@ -98,7 +105,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         isSymmetricLfm: Boolean
     ): Int {
         val ref = getRefRegister(lfmDeviationPeriod, isSymmetricLfm)
-        return ((lowestLfmFrequency*ref)/(4*Fref)).toInt()
+        return (((lowestLfmFrequency*ref)/(4*Fref)).toInt()) or INT_REG
     }
 
     private fun getInt1Register(
@@ -107,7 +114,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         isSymmetricLfm: Boolean
     ): Int {
         val ref = getRefRegister(lfmDeviationPeriod, isSymmetricLfm)
-        return ((highestLfmFrequency*ref)/(4*Fref)).toInt()
+        return (((highestLfmFrequency*ref)/(4*Fref)).toInt()) or INT_REG
     }
 
     private fun getFracRegister(
@@ -117,7 +124,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
     ): Int {
         val ref = getRefRegister(lfmDeviationPeriod, isSymmetricLfm)
         val fractionalMultPart = (lowestLfmFrequency*ref)%(4*Fref)
-        return ((MOD*ref*fractionalMultPart)/(4*Fref)).toInt()
+        return (((MOD*ref*fractionalMultPart)/(4*Fref)).toInt()) or FRAC_REG
     }
 
     private fun getFrac1Register(
@@ -127,7 +134,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
     ): Int {
         val ref = getRefRegister(lfmDeviationPeriod, isSymmetricLfm)
         val fractionalMultPart = (highestLfmFrequency*ref)%(4*Fref)
-        return ((MOD*ref*fractionalMultPart)/(4*Fref)).toInt()
+        return (((MOD*ref*fractionalMultPart)/(4*Fref)).toInt()) or FRAC_REG
     }
 
     private fun getLfm2Register(
@@ -138,7 +145,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         var sawStep = 4000
         val fracIncRemain = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)%(2*sawStep)).toInt()
         else ((lfmDeviationPeriod*Fpfd)%(sawStep)).toInt()
-        var fracInc = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)/2*sawStep).toInt()
+        var fracInc = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)/(2*sawStep)).toInt()
         else ((lfmDeviationPeriod*Fpfd)/sawStep).toInt()
 
         if (fracIncRemain != 0) {
@@ -147,7 +154,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
             else ((lfmDeviationPeriod*Fpfd)/(fracInc)).toInt()
         }
 
-        return (sawStep shl 8) or fracInc or 0x300000
+        return (sawStep shl 8) or fracInc or LFM2_REG
     }
 
     private fun getLfm1Register(
@@ -161,6 +168,11 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         val sawStep = ((getLfm2Register(lfmDeviationPeriod, isSymmetricLfm)) and 0xFFFFF) shr 8
         val dfrac = (((deviationFreq/4)*16*MOD)/(sawStep*Fpfd)).toInt()
 
-        return dfrac or 0x100000
+        return dfrac or LFM1_REG
+    }
+
+    private fun getLfm3Register(isSymmetricLfm: Boolean): Int {
+        return if (isSymmetricLfm) LFM3
+        else LFM31
     }
 }

@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ru.profitsw200.presentation.view.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,5 +15,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        openMainFragment()
+    }
+
+    private fun openMainFragment() {
+        fragmentManager.apply {
+            beginTransaction()
+                .replace(R.id.fragment_container, MainFragment.newInstance())
+                .commitNow()
+        }
     }
 }
