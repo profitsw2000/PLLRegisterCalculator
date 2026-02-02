@@ -166,7 +166,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         val Fpfd = Fref/getRefRegister(lfmDeviationPeriod, isSymmetricLfm)
         val deviationFreq = (highestLfmFrequency - lowestLfmFrequency)/4
         val sawStep = ((getLfm2Register(lfmDeviationPeriod, isSymmetricLfm)) and 0xFFFFF) shr 8
-        val dfrac = (((deviationFreq/4)*16*MOD)/(sawStep*Fpfd)).toInt()
+        val dfrac = (((deviationFreq)*16*MOD)/(sawStep*Fpfd)).toInt()
 
         return dfrac or LFM1_REG
     }
