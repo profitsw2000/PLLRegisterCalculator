@@ -30,8 +30,15 @@
     <string name="modulation_period_above_input_error_text">Не более 100 мс</string>
     <string name="modulation_period_under_input_error_text">Не менее 0,2 мс</string>
     <string name="register_calculation_error_text">Не удалось получить значения регистров</string>
+    <string name="beat_signal_parameters_calculation_error_text">Не удалось получить значения параметров сигнала биений</string>
     <string name="empty_input_error_text">Пустое поле</string>
     <string name="lowest_frequency_default_value">13250</string>
     <string name="highest_frequency_default_value">13400</string>
     <string name="lfm_period_default_value">50</string>
+    <string name="delay_time_default_value">425</string>
+    <string name="beat_signal_title_text">Сигнал биений</string>
+    <string name="beat_signal_frequency_title">Частота сигнала биений:</string>
+    <string name="beat_signal_period_title">Период сигнала биений:</string>
+    <string name="beat_signal_frequency_value">%1$.1f кГц</string>
+    <string name="beat_signal_period_value">%1$d мкс</string>
 </resources>

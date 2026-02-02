@@ -71,6 +71,11 @@ class MainFragment : Fragment() {
                 )
             }
         }
+        registersTitleTextView.setOnClickListener {
+            val beatSignalBottomSheetFragment = BeatSignalBottomSheetFragment()
+
+            beatSignalBottomSheetFragment.show(parentFragmentManager, "beat signal")
+        }
     }
 
     private fun clearInputFormsErrors() = with(binding) {

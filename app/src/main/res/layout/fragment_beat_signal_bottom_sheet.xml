@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_coordinator_layout"
+    tools:context=".presentation.view.BeatSignalBottomSheetFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/fragment_root_layout_padding">
+
+        <TextView
+            android:id="@+id/beat_signal_params_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/beat_signal_title_text"
+            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
+            android:textSize="@dimen/section_title_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/delay_time_input_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Задержка, нс"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/delay_time_value_text_input_layout"
+            app:layout_constraintBottom_toBottomOf="@id/delay_time_value_text_input_layout"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/delay_time_value_text_input_layout"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lfm_input_views_top_margin"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
+            app:layout_constraintTop_toBottomOf="@id/beat_signal_params_title_text_view"
+            app:layout_constraintStart_toEndOf="@id/delay_time_input_title_text_view"
+            app:layout_constraintEnd_toStartOf="@id/calculate_beat_signal_parameters_button">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/delay_time_value_text_input_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3"
+                android:padding="@dimen/input_form_edit_text_padding"
+                android:text="@string/delay_time_default_value" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/calculate_beat_signal_parameters_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
+            android:text="@string/calculate_button_text"
+            app:layout_constraintBottom_toBottomOf="@+id/delay_time_value_text_input_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/delay_time_value_text_input_layout"
+            app:layout_constraintTop_toTopOf="@+id/delay_time_value_text_input_layout" />
+
+        <TextView
+            android:id="@+id/beat_signal_frequency_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/register_title_text_size"
+            android:layout_marginTop="@dimen/register_section_margin_top"
+            android:text="@string/beat_signal_frequency_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delay_time_value_text_input_layout" />
+
+        <TextView
+            android:id="@+id/beat_signal_frequency_value_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/register_value_text_size"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/beat_signal_frequency_title_text_view"
+            app:layout_constraintStart_toEndOf="@+id/beat_signal_frequency_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/beat_signal_frequency_title_text_view"
+            tools:text="23,250" />
+
+        <TextView
+            android:id="@+id/beat_signal_period_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/register_title_text_size"
+            android:layout_marginTop="@dimen/register_section_margin_top"
+            android:text="@string/beat_signal_period_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/beat_signal_frequency_title_text_view" />
+
+        <TextView
+            android:id="@+id/beat_signal_period_value_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/register_value_text_size"
+            android:layout_marginStart="@dimen/lfm_input_views_left_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/beat_signal_period_title_text_view"
+            app:layout_constraintStart_toEndOf="@+id/beat_signal_period_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/beat_signal_period_title_text_view"
+            tools:text="78" />
+
+        <TextView
+            android:id="@+id/error_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/beat_signal_parameters_calculation_error_text"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delay_time_value_text_input_layout" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/beat_signal_parameters_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="beat_signal_frequency_title_text_view, beat_signal_frequency_value_text_view,
+            beat_signal_period_title_text_view,beat_signal_period_value_text_view"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

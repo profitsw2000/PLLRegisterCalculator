@@ -34,10 +34,10 @@ class BeatSignalFrequencyCalculatorRepositoryImpl : BeatSignalFrequencyCalculato
         lfmPeriod: Double,
         delayTime: Double,
         isSymmetricLfm: Boolean
-    ): Int {
+    ): Double {
         return if (isSymmetricLfm)
-                ((lfmPeriod/(delayTime*lfmDeviationFrequency))*MICRO_SECS_FACTOR).toInt()
-        else (((2*lfmPeriod)/(delayTime*lfmDeviationFrequency))*MICRO_SECS_FACTOR).toInt()
+                ((lfmPeriod/(delayTime*lfmDeviationFrequency))*MICRO_SECS_FACTOR)
+        else (((2*lfmPeriod)/(delayTime*lfmDeviationFrequency))*MICRO_SECS_FACTOR)
     }
 
     private fun calculateBeatSignalPeriod(
