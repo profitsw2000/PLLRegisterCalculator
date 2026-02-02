@@ -95,7 +95,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         lfmDeviationPeriod: Double,
         isSymmetricLfm: Boolean
     ): Int {
-        return if (lfmDeviationPeriod < 0.05 || isSymmetricLfm) 1
+        return if (lfmDeviationPeriod <= 0.05 || isSymmetricLfm) 1
         else 2
     }
 

@@ -47,7 +47,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel.setCoroutineScope(viewLifecycleOwner.lifecycleScope)
         observeData()
         initViews()
     }
@@ -67,7 +66,8 @@ class MainFragment : Fragment() {
                         highestFrequencyValueTextInputEditText.text.toString().toLong()*1_000_000,
                         periodValueTextInputEditText.text.toString().toDouble()*0.001,
                         symmetrySelectionCheckbox.isChecked
-                    )
+                    ),
+                    viewLifecycleOwner.lifecycleScope
                 )
             }
         }

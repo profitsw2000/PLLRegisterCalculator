@@ -39,6 +39,6 @@
     <string name="beat_signal_title_text">Сигнал биений</string>
     <string name="beat_signal_frequency_title">Частота сигнала биений:</string>
     <string name="beat_signal_period_title">Период сигнала биений:</string>
-    <string name="beat_signal_frequency_value">%1$.1f кГц</string>
+    <string name="beat_signal_frequency_value">%1$.3f кГц</string>
     <string name="beat_signal_period_value">%1$d мкс</string>
 </resources>

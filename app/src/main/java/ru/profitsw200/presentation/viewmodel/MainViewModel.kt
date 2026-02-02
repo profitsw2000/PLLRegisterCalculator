@@ -54,16 +54,15 @@ class MainViewModel(
         MutableLiveData<BeatSignalParametersResultLoadState>()
     val beatSignalParamsLiveData: LiveData<BeatSignalParametersResultLoadState> by this::_beatSignalParamsLiveData
 
-    fun setCoroutineScope(coroutineScope: CoroutineScope) {
-        this.lifecycleScope = coroutineScope
-    }
-
-    fun calculatePllRegisters(lfmInputParametersModel: LfmInputParametersModel) {
+    fun calculatePllRegisters(
+        lfmInputParametersModel: LfmInputParametersModel,
+        coroutineScope: CoroutineScope
+    ) {
         val errorCode = checkInputValues(lfmInputParametersModel)
         _pllRegistersLiveData.value = PLLRegistersLoadState.Load
         if (errorCode == NO_ERROR) {
             this.lfmInputParametersModel = lfmInputParametersModel
-            lifecycleScope.launch {
+            coroutineScope.launch {
                 val result = getPllRegistersFromRepository(lfmInputParametersModel)
                 if (result != null) _pllRegistersLiveData.value = PLLRegistersLoadState.Success(result)
             }
@@ -86,9 +85,11 @@ class MainViewModel(
         return deferred.await()
     }
 
-    fun calculateBeatSignalParameters(delayTimeNanoSeconds: Int) {
+    fun calculateBeatSignalParameters(delayTimeNanoSeconds: Int,
+                                      coroutineScope: CoroutineScope
+    ) {
         _beatSignalParamsLiveData.value = BeatSignalParametersResultLoadState.Load
-        lifecycleScope.launch {
+        coroutineScope.launch {
             val result = getBeatSignalParametersFromRepository(delayTimeNanoSeconds)
             if (result != null) _beatSignalParamsLiveData.value =
                 BeatSignalParametersResultLoadState.Success(result)

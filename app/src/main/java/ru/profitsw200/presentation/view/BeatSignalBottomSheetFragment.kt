@@ -44,7 +44,7 @@ class BeatSignalBottomSheetFragment : BottomSheetDialogFragment() {
         val layout: CoordinatorLayout = binding.rootCoordinatorLayout
         layout.minimumHeight = 1500
 
-        mainViewModel.setCoroutineScope(viewLifecycleOwner.lifecycleScope)
+        //mainViewModel.setCoroutineScope(viewLifecycleOwner.lifecycleScope)
         initViews()
         observeData()
     }
@@ -52,7 +52,8 @@ class BeatSignalBottomSheetFragment : BottomSheetDialogFragment() {
     private fun initViews() = with(binding) {
         calculateBeatSignalParametersButton.setOnClickListener {
             mainViewModel.calculateBeatSignalParameters(
-                delayTimeValueTextInputEditText.text.toString().toInt()
+                delayTimeValueTextInputEditText.text.toString().toInt(),
+                viewLifecycleOwner.lifecycleScope
             )
         }
     }
