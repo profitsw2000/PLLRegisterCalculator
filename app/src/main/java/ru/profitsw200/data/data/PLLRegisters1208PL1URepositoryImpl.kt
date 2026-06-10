@@ -13,7 +13,8 @@ const val CTR1 = 0x840608
 const val CTR2 = 0xA00002
 const val CTR3 = 0xC00001
 const val LFM3 = 0x500204
-const val LFM31 = 0x500006
+const val LFM31 = 0x500004
+const val LFM31_SYM = 0x500006
 const val INT_REG = 0x200000
 const val FRAC_REG = 0x400000
 const val LFM1_REG = 0x100000
@@ -86,7 +87,7 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
                     lfmDeviationPeriod,
                     isSymmetricLfm
                 ),
-                lfm31 = LFM31
+                lfm31 = LFM31_SYM
             )
         }
     }
@@ -145,9 +146,8 @@ class PLLRegisters1208PL1URepositoryImpl : PLLRegisters1208PL1URepository {
         var sawStep = 4000
         val fracIncRemain = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)%(2*sawStep)).toInt()
         else ((lfmDeviationPeriod*Fpfd)%(sawStep)).toInt()
-        var fracInc = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)/(2*sawStep)).toInt()
-        else ((lfmDeviationPeriod*Fpfd)/sawStep).toInt()
-
+        var fracInc = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)/(2*sawStep)).toInt() - 1
+        else ((lfmDeviationPeriod*Fpfd)/sawStep).toInt() - 1
         if (fracIncRemain != 0) {
             fracInc += 1
             sawStep = if(isSymmetricLfm) ((lfmDeviationPeriod*Fpfd)/(2*fracInc)).toInt()

@@ -25,7 +25,8 @@ class BeatSignalFrequencyCalculatorRepositoryImpl : BeatSignalFrequencyCalculato
                 lfmInputParametersModel.lfmDeviationPeriod,
                 delayTime,
                 lfmInputParametersModel.isSymmetricLfm
-            )
+            ),
+            100
         )
     }
 

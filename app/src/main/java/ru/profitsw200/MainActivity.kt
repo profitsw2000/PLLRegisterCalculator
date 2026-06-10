@@ -15,7 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        openMainFragment()
+        if (savedInstanceState == null) {
+            openMainFragment()
+        }
     }
 
     private fun openMainFragment() {

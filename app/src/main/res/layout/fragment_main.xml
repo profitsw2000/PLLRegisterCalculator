@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/input_form_edit_text_padding"
                 android:inputType="number"
-                android:text="@string/lowest_frequency_default_value"
+                tools:text="@string/lowest_frequency_default_value"
                 android:maxLength="5" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/input_form_edit_text_padding"
-                android:text="@string/highest_frequency_default_value"
+                tools:text="@string/highest_frequency_default_value"
                 android:maxLength="5"
                 android:inputType="number"/>
 
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/input_form_edit_text_padding"
                 android:inputType="numberDecimal"
-                android:text="@string/lfm_period_default_value"
+                tools:text="@string/lfm_period_default_value"
                 android:digits="0123456789."
                 android:maxLength="3" />
 
