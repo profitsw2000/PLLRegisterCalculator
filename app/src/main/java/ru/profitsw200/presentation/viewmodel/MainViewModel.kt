@@ -126,4 +126,8 @@ class MainViewModel(
         return errorCode
     }
 
+    fun getInputFormsData(): LfmInputParametersModel {
+        return lfmInputParametersModel
+    }
+
 }

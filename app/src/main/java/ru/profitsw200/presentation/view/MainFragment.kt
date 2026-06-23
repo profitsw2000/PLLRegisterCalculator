@@ -47,6 +47,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (savedInstanceState == null) setInputForms()
         observeData()
         initViews()
     }
@@ -76,6 +77,15 @@ class MainFragment : Fragment() {
 
             beatSignalBottomSheetFragment.show(parentFragmentManager, "beat signal")
         }
+    }
+
+    private fun setInputForms() = with(binding) {
+        val lfmInputParametersModel = mainViewModel.getInputFormsData()
+
+        lowestFrequencyValueTextInputEditText.setText(lfmInputParametersModel.lowestLfmFrequency.toString())
+        highestFrequencyValueTextInputEditText.setText(lfmInputParametersModel.highestLfmFrequency.toString())
+        periodValueTextInputEditText.setText((lfmInputParametersModel.lfmDeviationPeriod * 1000).toInt().toString())
+        symmetrySelectionCheckbox.isChecked = lfmInputParametersModel.isSymmetricLfm
     }
 
     private fun clearInputFormsErrors() = with(binding) {
